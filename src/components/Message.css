@@ -26,12 +26,16 @@
   background-color: #fff;
 }
 
-.message__content {
+/* .message__content {
   margin-bottom: 7px;
-}
+} */
 
+.message__wrap {
+  margin-left: auto;
+  display: flex;
+}
 .message__timestamp {
-  margin-left: 10px;
+  margin-left: 5px;
   font-size: 0.6875rem;
   color: #667781;
   align-self: flex-end;
