@@ -12,7 +12,7 @@ import Message from "./Message";
 function Chat() {
   // const reciever = "reciever";
   const [messages, setMessages] = useState([
-    { id: 0, messageContent: "this is a message", reciever: 'reciever' },
+    { id: 0, messageContent: "this is a message", reciever: "reciever" },
   ]);
   const [current, setCurrent] = useState("");
 
@@ -31,7 +31,13 @@ function Chat() {
   };
 
   const messagesList = messages.map((message) => {
-    return <Message content={message.messageContent} key={message.id} reciever={message.reciever} />;
+    return (
+      <Message
+        content={message.messageContent}
+        key={message.id}
+        reciever={message.reciever}
+      />
+    );
   });
   return (
     <div className="chat">
