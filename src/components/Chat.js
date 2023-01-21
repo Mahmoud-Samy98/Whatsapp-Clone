@@ -12,7 +12,7 @@ import Message from "./Message";
 function Chat() {
   // const reciever = "reciever";
   const [messages, setMessages] = useState([
-    { id: 0, messageContent: "this is a message" },
+    { id: 0, messageContent: "this is a message", reciever: 'reciever' },
   ]);
   const [current, setCurrent] = useState("");
 
