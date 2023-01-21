@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Chat.css";
 
 import { Avatar, IconButton } from "@mui/material";
@@ -7,8 +7,32 @@ import AttachFileIcon from "@mui/icons-material/AttachFile";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
 import MicIcon from "@mui/icons-material/Mic";
+import Message from "./Message";
 
 function Chat() {
+  // const reciever = "reciever";
+  const [messages, setMessages] = useState([
+    { id: 0, messageContent: "this is a message" },
+  ]);
+  const [current, setCurrent] = useState("");
+
+  const updateMessage = (e) => {
+    setCurrent(e.target.value);
+  };
+
+  const SubmitHandler = (e) => {
+    e.preventDefault();
+    messages.push({
+      id: messages.length,
+      messageContent: current,
+    });
+    setCurrent("");
+    console.log(messages);
+  };
+
+  const messagesList = messages.map((message) => {
+    return <Message content={message.messageContent} key={message.id} />;
+  });
   return (
     <div className="chat">
       <div className="chat__header">
@@ -26,23 +50,8 @@ function Chat() {
           </IconButton>
         </div>
       </div>
-      <div className="chat__body">
-        <p className="chat__message">
-          <span className="chat__name">Samy</span>
-          This is a message
-          <span className="chat__timestamp">{new Date().toUTCString()}</span>
-        </p>
-        <p className="chat__message chat__reciever">
-          <span className="chat__name">Samy</span>
-          This is a message
-          <span className="chat__timestamp">{new Date().toUTCString()}</span>
-        </p>
-        <p className="chat__message">
-          <span className="chat__name">Samy</span>
-          This is a message
-          <span className="chat__timestamp">{new Date().toUTCString()}</span>
-        </p>
-      </div>
+      <div className="chat__body">{messagesList}</div>
+
       <div className="chat__footer">
         <IconButton>
           <InsertEmoticonIcon />
@@ -50,8 +59,13 @@ function Chat() {
         <IconButton>
           <AttachFileIcon />
         </IconButton>
-        <form>
-          <input type="text" placeholder="Type a message" />
+        <form onSubmit={SubmitHandler}>
+          <input
+            type="text"
+            placeholder="Type a message"
+            value={current}
+            onChange={updateMessage}
+          />
           <button type="submit">Send a message</button>
         </form>
         <IconButton>
