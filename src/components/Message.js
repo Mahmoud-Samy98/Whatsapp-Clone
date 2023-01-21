@@ -16,7 +16,9 @@ function Message({ reciever, content }) {
         {/* <span className="message__name">Samy</span> */}
         <span className="message__content">{content}</span>
 
-        <span className="message__timestamp">{time}</span>
+        <div className="message__wrap">
+          <span className="message__timestamp">{time}</span>
+        </div>
       </p>
     );
   };
