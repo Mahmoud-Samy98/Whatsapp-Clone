@@ -31,7 +31,7 @@ function Chat() {
   };
 
   const messagesList = messages.map((message) => {
-    return <Message content={message.messageContent} key={message.id} />;
+    return <Message content={message.messageContent} key={message.id} reciever={message.reciever} />;
   });
   return (
     <div className="chat">
