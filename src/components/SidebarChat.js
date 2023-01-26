@@ -2,14 +2,20 @@ import React from "react";
 import { Avatar } from "@mui/material";
 import "./SidebarChat.css";
 
-function SidebarChat() {
+function SidebarChat({ id, chatName, lastMessage, setChatID }) {
+  const viewChat = () => {
+    console.log(
+      `id: ${id}, chatname: ${chatName}, last message: ${lastMessage}`
+    );
+    setChatID(id);
+  };
   return (
-    <div className="sidebarChat">
+    <div className="sidebarChat" onClick={viewChat}>
       <Avatar />
 
       <div className="sidebarChat__info">
-        <h2>Room Name</h2>
-        <p>Last message</p>
+        <h2>{chatName}</h2>
+        <p>{lastMessage}</p>
       </div>
     </div>
   );

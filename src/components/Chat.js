@@ -1,20 +1,24 @@
 import React, { useState } from "react";
 import "./Chat.css";
 
+import Message from "./Message";
 import { Avatar, IconButton } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
 import MicIcon from "@mui/icons-material/Mic";
-import Message from "./Message";
+import { useDispatch, useSelector } from "react-redux";
+import { addMessage } from "../redux/messageSlice";
 
-function Chat() {
+function Chat({ chatID }) {
   // const reciever = "reciever";
-  const [messages, setMessages] = useState([
-    { id: 0, messageContent: "this is a message", reciever: "reciever" },
-  ]);
+
   const [current, setCurrent] = useState("");
+
+  const { chat } = useSelector((state) => state.message);
+  const messages = chat[chatID].messages;
+  const dispatch = useDispatch();
 
   const updateMessage = (e) => {
     setCurrent(e.target.value);
@@ -22,14 +26,14 @@ function Chat() {
 
   const SubmitHandler = (e) => {
     e.preventDefault();
-    messages.push({
-      id: messages.length,
-      messageContent: current,
-    });
+    // messages.push({
+    //   id: messages.length,
+    //   messageContent: current,
+    // });
+    dispatch(addMessage({ chatID, current }));
     setCurrent("");
-    console.log(messages);
+    console.log(chat);
   };
-
   const messagesList = messages.map((message) => {
     return (
       <Message
@@ -44,7 +48,7 @@ function Chat() {
       <div className="chat__header">
         <Avatar />
         <div className="chat__headerInfo">
-          <h3>Room name</h3>
+          <h3>{chat[chatID].chatName}</h3>
           <p>Last seen at...</p>
         </div>
         <div className="chat__headerRight">
