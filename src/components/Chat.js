@@ -30,9 +30,10 @@ function Chat({ chatID }) {
     //   id: messages.length,
     //   messageContent: current,
     // });
-    dispatch(addMessage({ chatID, current }));
-    setCurrent("");
-    console.log(chat);
+    if (current !== "") {
+      dispatch(addMessage({ chatID, current }));
+      setCurrent("");
+    }
   };
   const messagesList = messages.map((message) => {
     return (
